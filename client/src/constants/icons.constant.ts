@@ -1,0 +1,18 @@
+export const ALLOWED_ICONS = [
+  "Printer",
+  "Palette",
+  "Image",
+  "Video",
+  "Megaphone",
+  "PenTool",
+  "Layers",
+  "Sparkles",
+  "Brush",
+  "Camera",
+  "FileImage",
+  "Tag",
+  "Package",
+  "Star",
+  "Shirt",
+  "Presentation",
+] as const;
