@@ -2,31 +2,56 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:latest
-    container_name: mongodb
+    image: mongo:7
+    container_name: d-sign-print-mongodb
+    restart: unless-stopped
     ports:
       - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=d-sign-print
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
   server:
     build: ./server
+    container_name: d-sign-print-server
+    restart: unless-stopped
     ports:
       - "5000:5000"
-    environment:
-      - PORT=5000
-      - MONGO_URI=mongodb://mongodb:27017/d-sign-print
     env_file:
       - ./server/.env
+    environment:
+      # Ecrase toute valeur locale du .env pour garantir que le serveur
+      # parle bien au conteneur mongodb (nom de service = hostname reseau Docker)
+      - MONGODB_URI=mongodb://mongodb:27017/d-sign-print
+    volumes:
+      - ./server/src:/app/src
+      - server-node-modules:/app/node_modules
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
 
   client:
     build: ./client
+    container_name: d-sign-print-client
+    restart: unless-stopped
     ports:
       - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    volumes:
+      - ./client/src:/app/src
+      - client-node-modules:/app/node_modules
     depends_on:
       - server
 
 volumes:
   mongo-data:
+  server-node-modules:
+  client-node-modules:

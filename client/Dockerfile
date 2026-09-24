@@ -12,4 +12,6 @@ RUN chmod -R +x node_modules/.bin
 
 EXPOSE 5173
 
+# --host est indispensable pour que Vite ecoute sur toutes les interfaces
+# et soit donc joignable depuis l'exterieur du conteneur (port mappe).
 CMD ["npm", "run", "dev", "--", "--host"]
