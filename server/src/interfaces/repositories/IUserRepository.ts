@@ -6,4 +6,6 @@ export interface IUserRepository {
   findById(id: string): Promise<UserDocument | null>;
   create(data: CreateUserDTO): Promise<UserDocument>;
   findAll(): Promise<UserDocument[]>;
+  setActive(id: string, isActive: boolean): Promise<UserDocument | null>;
+  delete(id: string): Promise<boolean>;
 }

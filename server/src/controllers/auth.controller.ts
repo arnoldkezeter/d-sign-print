@@ -31,7 +31,7 @@ export async function refresh(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export function logout(req: Request, res: Response) {
+export function logout(_req: Request, res: Response) {
   clearAuthCookies(res);
   res.status(200).json({ success: true, message: "Déconnexion réussie" });
 }
@@ -55,6 +55,33 @@ export async function register(req: Request, res: Response, next: NextFunction) 
   try {
     const user = await authService.register(req.body);
     res.status(201).json({ success: true, data: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function listUsers(_req: Request, res: Response, next: NextFunction) {
+  try {
+    const users = await authService.listUsers();
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function setUserActive(req: Request, res: Response, next: NextFunction) {
+  try {
+    const user = await authService.setUserActive(req.params.id, req.body.isActive);
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteUser(req: Request, res: Response, next: NextFunction) {
+  try {
+    await authService.deleteUser(req.params.id);
+    res.status(200).json({ success: true, message: "Utilisateur supprimé" });
   } catch (error) {
     next(error);
   }

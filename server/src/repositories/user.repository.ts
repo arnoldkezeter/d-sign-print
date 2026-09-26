@@ -18,6 +18,15 @@ export class UserRepository implements IUserRepository {
   }
 
   async findAll(): Promise<UserDocument[]> {
-    return UserModel.find().exec();
+    return UserModel.find().sort({ createdAt: -1 }).exec();
+  }
+
+  async setActive(id: string, isActive: boolean): Promise<UserDocument | null> {
+    return UserModel.findByIdAndUpdate(id, { isActive }, { new: true }).exec();
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await UserModel.findByIdAndDelete(id).exec();
+    return !!result;
   }
 }

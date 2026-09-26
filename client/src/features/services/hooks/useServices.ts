@@ -12,6 +12,14 @@ export function usePublicServices() {
   });
 }
 
+export function useServiceBySlug(slug: string | undefined) {
+  return useQuery({
+    queryKey: [SERVICES_KEY, "slug", slug],
+    queryFn: () => serviceApi.getBySlug(slug!),
+    enabled: !!slug,
+  });
+}
+
 export function useAdminServices(params: ServiceListParams) {
   return useQuery({
     queryKey: [SERVICES_KEY, "admin", params],

@@ -8,6 +8,11 @@ export const serviceApi = {
     return data.data;
   },
 
+  async getBySlug(slug: string): Promise<Service> {
+    const { data } = await api.get(`/services/slug/${slug}`);
+    return data.data;
+  },
+
   async getAdminList(params: ServiceListParams): Promise<PaginatedResponse<Service>> {
     const { data } = await api.get("/services/admin", { params });
     return data;

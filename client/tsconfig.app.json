@@ -13,6 +13,7 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "allowJs": false,
+    "noEmit": true,
 
     "paths": {
       "@/*": ["./src/*"]

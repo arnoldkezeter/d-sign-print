@@ -9,6 +9,14 @@ import { errorHandler, notFoundHandler } from "@/middlewares/errorHandler.js";
 import healthRoutes from "@/routes/health.route.js";
 import authRoutes from "@/routes/auth.routes.js";
 import serviceRoutes from "@/routes/service.routes.js";
+import portfolioRoutes from "@/routes/portfolio.routes.js";
+import testimonialRoutes from "@/routes/testimonial.routes.js";
+import blogRoutes from "@/routes/blog.routes.js";
+import quoteRoutes from "@/routes/quote.routes.js";
+import contactRoutes from "@/routes/contact.routes.js";
+import settingsRoutes from "@/routes/settings.routes.js";
+import dashboardRoutes from "@/routes/dashboard.routes.js";
+import uploadRoutes from "@/routes/upload.routes.js";
 
 export function createApp(): Application {
   const app = express();
@@ -38,7 +46,14 @@ export function createApp(): Application {
   app.use("/api", healthRoutes);
   app.use("/api/auth", authRoutes);
   app.use("/api/services", serviceRoutes);
-  // Les futures routes (auth, services, portfolio, etc.) seront montées ici
+  app.use("/api/portfolio", portfolioRoutes);
+  app.use("/api/testimonials", testimonialRoutes);
+  app.use("/api/blog", blogRoutes);
+  app.use("/api/quotes", quoteRoutes);
+  app.use("/api/contact", contactRoutes);
+  app.use("/api/settings", settingsRoutes);
+  app.use("/api/dashboard", dashboardRoutes);
+  app.use("/api/uploads", uploadRoutes);
 
   // 404 + gestion d'erreurs globale (toujours en dernier)
   app.use(notFoundHandler);

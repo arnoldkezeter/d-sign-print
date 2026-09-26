@@ -71,6 +71,22 @@ export class AuthService {
     return this.toSafeUser(user);
   }
 
+  async listUsers(): Promise<(SafeUser & { isActive: boolean; createdAt: Date })[]> {
+    const users = await this.userRepository.findAll();
+    return users.map((user) => ({ ...this.toSafeUser(user), isActive: user.isActive, createdAt: user.createdAt }));
+  }
+
+  async setUserActive(id: string, isActive: boolean): Promise<SafeUser> {
+    const user = await this.userRepository.setActive(id, isActive);
+    if (!user) throw new BadRequestError("Utilisateur introuvable");
+    return this.toSafeUser(user);
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    const deleted = await this.userRepository.delete(id);
+    if (!deleted) throw new BadRequestError("Utilisateur introuvable");
+  }
+
   private toSafeUser(user: UserDocument): SafeUser {
     return {
       id: user.id,

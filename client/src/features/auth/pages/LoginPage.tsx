@@ -4,6 +4,7 @@ import { loginSchema, type LoginFormValues } from "@/features/auth/schemas/login
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Logo } from "@/components/shared/Logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -31,7 +32,8 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8 px-4">
+      <Logo size="lg" showTagline />
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-center font-heading text-2xl">

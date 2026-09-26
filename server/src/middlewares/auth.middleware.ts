@@ -4,7 +4,7 @@ import { UnauthorizedError, ForbiddenError } from "@/utils/AppError.js";
 import { COOKIE_NAMES } from "@/constants/cookies.constant.js";
 import type { Role } from "@/constants/roles.constant.js";
 
-export function protect(req: Request, res: Response, next: NextFunction) {
+export function protect(req: Request, _res: Response, next: NextFunction) {
   const token = req.cookies?.[COOKIE_NAMES.ACCESS_TOKEN];
 
   if (!token) {
@@ -20,7 +20,7 @@ export function protect(req: Request, res: Response, next: NextFunction) {
 }
 
 export function restrictTo(...roles: Role[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, _res: Response, next: NextFunction) => {
     if (!req.user || !roles.includes(req.user.role)) {
       return next(new ForbiddenError("Vous n'avez pas les droits pour cette action"));
     }

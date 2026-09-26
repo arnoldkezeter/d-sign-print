@@ -7,7 +7,7 @@ const serviceService = new ServiceService(new ServiceRepository());
 
 // --- Public ---
 
-export async function getPublicServices(req: Request, res: Response, next: NextFunction) {
+export async function getPublicServices(_req: Request, res: Response, next: NextFunction) {
   try {
     const services = await serviceService.getPublicList();
     res.status(200).json({ success: true, data: services });
