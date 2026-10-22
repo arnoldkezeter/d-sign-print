@@ -19,7 +19,7 @@ export function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-primary/5 via-brand-blue/5 to-brand-yellow/10 px-4 py-20 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-primary/10 to-brand-yellow/10 px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
             {settings?.tagline ?? "Votre partenaire en communication visuelle !"}

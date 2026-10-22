@@ -47,6 +47,8 @@ services:
       - VITE_API_URL=http://localhost:5000/api
     volumes:
       - ./client/src:/app/src
+      - ./client/public:/app/public
+      - ./client/index.html:/app/index.html
       - client-node-modules:/app/node_modules
     depends_on:
       - server
