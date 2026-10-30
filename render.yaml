@@ -16,7 +16,7 @@ services:
       - key: COOKIE_SECURE
         value: true
       - key: CLIENT_URL
-        value: https://dsign-print-client.onrender.com
+        value: https://dsign-print.onrender.com
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_REFRESH_SECRET
