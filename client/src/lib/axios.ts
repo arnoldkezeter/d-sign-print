@@ -4,7 +4,8 @@ import { ADMIN_PATH_PREFIX } from "@/constants/routes.constant";
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
-  timeout: 15000,
+  // 60 s : l'API gratuite de Render peut mettre ~1 min à se réveiller après une mise en veille
+  timeout: 60000,
 });
 
 export const AUTH_EXPIRED_EVENT = "auth:expired";

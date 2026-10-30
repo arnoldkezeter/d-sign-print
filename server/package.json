@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "API backend de D-sign Print",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "tsc --noEmit",
+    "start": "tsx src/index.ts",
     "seed:admin": "tsx src/scripts/seedAdmin.ts",
     "lint": "eslint src --ext .ts"
   },
@@ -24,6 +24,7 @@
     "morgan": "^1.11.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.10.1",
+    "tsx": "^4.23.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "@types/multer": "^1.4.13",
     "@types/node": "^22.20.0",
     "@types/nodemailer": "^6.4.24",
-    "tsx": "^4.23.0",
     "typescript": "^5.9.3"
   },
   "keywords": [],
